@@ -9,5 +9,7 @@ export const swaggerSpec = swaggerJSDoc({
       version: '1.0.0',
     },
   },
-  apis: [path.resolve(process.cwd(), 'docs/**/*.ts')], 
+  apis: [
+  path.join(process.cwd(), 'docs/**/*.ts'), 
+  ],
 });
