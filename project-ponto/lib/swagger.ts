@@ -1,7 +1,6 @@
 import swaggerJSDoc from 'swagger-jsdoc';
 import path from 'path';
 
-
 export const swaggerSpec = swaggerJSDoc({
   definition: {
     openapi: '3.0.0',
@@ -10,5 +9,7 @@ export const swaggerSpec = swaggerJSDoc({
       version: '1.0.0',
     },
   },
-  apis: [path.resolve(process.cwd(), 'docs/**/*.ts')], 
+  apis: [
+  path.join(process.cwd(), 'docs/**/*.ts'), 
+  ],
 });
