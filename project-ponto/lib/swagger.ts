@@ -1,10 +1,5 @@
 import swaggerJSDoc from 'swagger-jsdoc';
 import path from 'path';
-import fs from 'fs';
-
-const docsPath = path.resolve(process.cwd(), 'docs');
-console.log('Verificando docsPath:', docsPath);
-console.log('Arquivos:', fs.readdirSync(docsPath));
 
 export const swaggerSpec = swaggerJSDoc({
   definition: {
