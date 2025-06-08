@@ -1,4 +1,5 @@
-// lib/swagger.ts
+import '../docs/users.docs';
+import '../docs/enterprises.docs';
 import swaggerJSDoc from 'swagger-jsdoc';
 
 export const swaggerSpec = swaggerJSDoc({
