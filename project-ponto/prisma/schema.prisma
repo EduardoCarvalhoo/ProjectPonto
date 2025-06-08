@@ -1,0 +1,100 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         Int           @id @default(autoincrement())
+  name       String
+  document   String
+  email      String        @unique
+  user_type  UserType
+  status     UserStatus
+  created_at DateTime      @default(now())
+  updated_at DateTime      @updatedAt
+  deleted_at DateTime?
+
+  enterprises   Enterprise[]       @relation("OwnedEnterprises")
+  companyUsers  CompanyUser[]
+  permissions   Permission[]
+  pointRecords PointRecord[]
+}
+
+model Enterprise {
+  id           Int           @id @default(autoincrement())
+  name         String
+  document     String
+  address      String
+  phone        String
+  email        String
+  created_at   DateTime      @default(now())
+  updated_at   DateTime      @updatedAt
+  deleted_at   DateTime?
+  owner_id     Int
+  owner        User          @relation("OwnedEnterprises", fields: [owner_id], references: [id])
+  plan_id      Int?
+  plan         Plan?         @relation(fields: [plan_id], references: [id])
+
+  companyUsers CompanyUser[]
+}
+
+model Plan {
+  id     Int      @id @default(autoincrement())
+  value  Float
+  name   String
+
+  enterprises Enterprise[]
+}
+
+model CompanyUser {
+  user_id     Int
+  company_id  Int
+  user    User      @relation(fields: [user_id], references: [id])
+  company Enterprise @relation(fields: [company_id], references: [id])
+  @@id([user_id, company_id])
+}
+
+model PointRecord {
+  id Int       @id @default(autoincrement())
+  coordinates String
+  user_id    Int
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  user User @relation(fields: [user_id], references: [id])
+}
+
+model ConfigurationPoint {
+  id Int      @id @default(autoincrement())
+  starts_at DateTime
+  ends_at   DateTime
+}
+
+model Permission {
+  id         Int      @id @default(autoincrement())
+  role       Role   
+  user_id    Int
+  status     String
+  created_at DateTime @default(now())
+
+  user User @relation(fields: [user_id], references: [id])
+}
+
+enum UserType {
+  OWNER
+  EMPLOYEE
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum Role {
+  ADMIN
+  EDITOR
+  VIEWER
+}
