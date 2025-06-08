@@ -1,6 +1,6 @@
-import '../docs/users.docs';
-import '../docs/enterprises.docs';
 import swaggerJSDoc from 'swagger-jsdoc';
+import path from 'path';
+
 
 export const swaggerSpec = swaggerJSDoc({
   definition: {
@@ -10,5 +10,5 @@ export const swaggerSpec = swaggerJSDoc({
       version: '1.0.0',
     },
   },
-  apis: ['./docs/**/*.ts'], 
+  apis: [path.resolve(process.cwd(), 'docs/**/*.ts')], 
 });
