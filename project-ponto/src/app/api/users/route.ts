@@ -34,3 +34,24 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: "Erro na criação de usuário", details: error }, { status: 422 });
     }
 }
+
+export async function GET() {
+  try {
+    const users = await prisma.user.findMany({
+      orderBy: { created_at: 'desc' },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        document: true,
+        user_type: true,
+        status: true,
+        created_at: true,
+      },
+    });
+
+    return NextResponse.json(users);
+  } catch (error) {
+    return NextResponse.json({ error: 'Erro ao buscar usuários', details: error }, { status: 422 });
+  }
+}
