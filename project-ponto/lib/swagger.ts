@@ -12,5 +12,6 @@ export const swaggerSpec = swaggerJSDoc({
   apis: [
     path.join(process.cwd(), 'docs/users.docs.ts'),
     path.join(process.cwd(), 'docs/enterprises.docs.ts'),
+    path.join(process.cwd(), 'docs/deleteUser.docs.ts')
   ],
 });
