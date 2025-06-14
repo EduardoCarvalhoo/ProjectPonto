@@ -5,11 +5,12 @@ export const swaggerSpec = swaggerJSDoc({
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'Meu ponto: APIs de gerenciamento de ponto digital',
+      title: 'Meu ponto: API de gerenciamento de ponto digital',
       version: '1.0.0',
     },
   },
   apis: [
-  path.join(process.cwd(), 'docs/**/*.ts'), 
+    path.join(process.cwd(), 'docs/users.docs.ts'),
+    path.join(process.cwd(), 'docs/enterprises.docs.ts'),
   ],
 });
