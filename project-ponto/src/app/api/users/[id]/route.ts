@@ -3,8 +3,8 @@ import { NextResponse } from 'next/server';
 
 const prisma = new PrismaClient();
 
-export async function DELETE(_: Request, { params }: { params: { id: string } }) {
-  const userId = parseInt(params.id);
+export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+  const userId = Number(params.id);
 
   if (isNaN(userId)) {
     return NextResponse.json({ error: 'ID inválido' }, { status: 400 });
